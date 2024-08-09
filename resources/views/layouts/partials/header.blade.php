@@ -1,8 +1,18 @@
 <header>
+    @php
+        use Carbon\Carbon;
+
+    $now = Carbon::now('Asia/Riyadh')->locale('ar');
+        $dayOfWeek = $now->translatedFormat('l');
+        $formattedDate = $now->translatedFormat('d F Y');
+        $formattedTime = $now->translatedFormat('h:i A');
+        $temperature = '39';
+        $city = 'الرياض';
+    @endphp
     <div class="container-fluid">
         <div class="header">
             <a href="/" class="logo">
-                <img src="{{ asset('images/logo.png')}}" alt="Inhub" class="img-fluid" />
+                <img src="{{ asset('images/logo.png') }}" alt="Inhub" class="img-fluid" />
             </a>
             <a role="button" class="menu-btn">
                 <i class="las la-bars"></i>
@@ -11,26 +21,20 @@
                 <div class="information-item">
                     <i class="las la-calendar"></i>
                     <div class="information-text">
-                        <span>الخميس</span>
-                        <strong>26 أكتوبر 2023</strong>
+                        <span>{{ $dayOfWeek }}</span>
+                        <strong>{{ $formattedDate }}</strong>
                     </div>
                 </div>
                 <div class="information-item">
                     <i class="las la-clock"></i>
                     <div class="information-text">
                         <span>الساعة الآن</span>
-                        <strong>02:30 صباحًا</strong>
-                    </div>
-                </div>
-                <div class="information-item">
-                    <i class="las la-cloud-sun-rain"></i>
-                    <div class="information-text">
-                        <span>درجة الحرارة اليوم</span>
-                        <strong>الرياض - 39&deg;</strong>
+                        <strong>{{ $formattedTime }}</strong>
                     </div>
                 </div>
             </div>
             @include('layouts.partials.search')
         </div>
+        @include('layouts.partials.nav',['categories' => $categories])
     </div>
 </header>

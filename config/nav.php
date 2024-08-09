@@ -14,7 +14,7 @@ return [
     [
         'icon' => 'fas fa-list',
         'route' => 'dashboard.categories.index',
-        'title' => 'الفئات',
+        'title' => 'التصنيفات',
         'active' => 'dashboard.categories.*',
         'ability' => 'categories.view'
 

@@ -3,6 +3,8 @@
         [
             'text' => 'من نحن',
         ],
+       'setting' => $setting,
+       'categories' => $categories
     ],
 ])
 

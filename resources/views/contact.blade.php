@@ -2,7 +2,10 @@
     'breadcrumbs' => [
         [
             'text' => 'اتصل بنا',
+            'link' => '#',
         ],
+          'setting' => $setting,
+       'categories' => $categories
     ],
 ])
 

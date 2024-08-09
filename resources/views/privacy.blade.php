@@ -3,6 +3,8 @@
         [
             'text' => 'سياسة الخصوصية',
         ],
+          'setting' => $setting,
+       'categories' => $categories
     ],
 ])
 

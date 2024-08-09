@@ -98,11 +98,15 @@ class BlogController extends Controller
         {
             return null;
         }
-        $file = $request->file('image');
-        $path = $file->store('blogs','public');
 
-        return $path;
+        $files = $request->file('image');
+        $paths = [];
 
+        foreach ($files as $file) {
+            $paths[] = $file->store('blogs', 'public');
+        }
+
+        return implode(',', $paths);
     }
 
 }

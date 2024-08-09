@@ -1,16 +1,11 @@
 @extends('layouts.master', [
     'breadcrumbs' => [
         [
-            'text' => 'السياحة المحلية (السعودية)',
+            'text' => $blog['title'],
             'link' => '/category',
         ],
-        [
-            'text' => 'الرياض',
-            'link' => '/subCategory',
-        ],
-        [
-            'text' => 'المتحف الوطني السعودي',
-        ],
+       'setting' => $setting,
+       'categories' => $categories
     ],
 ])
 
@@ -24,11 +19,14 @@
                     <div class="post-slider">
                         <div class="swiper">
                             <div class="swiper-wrapper">
-                                @for ($i = 1; $i <= 4; $i++)
+                                @php
+                                    $images = explode(',',$blog['image'])
+                                @endphp
+                                @for ($i = 0; $i < count($images); $i++)
                                     <div class="swiper-slide">
-                                        <a data-fancybox="post" href="images/post/{{ $i }}.jpg"
+                                        <a data-fancybox="post" href="{{ asset('storage/'.$images[$i]) }}"
                                             class="post-img loading-img lazy-img-parent">
-                                            <img data-src="images/post/{{ $i }}.jpg"
+                                            <img data-src="{{ asset('storage/'.$images[$i]) }}"
                                                 class="img-fluid lazy-img" />
                                         </a>
                                     </div>
@@ -47,7 +45,7 @@
                 <div class="post-information">
                     <div class="post-tags">
                         <a href="/search" class="tag">
-                            السياحة المحلية (السعودية)
+                            {{ $blog['title'] }}
                         </a>
                         <a href="/search" class="tag">
                             الرياض
@@ -55,7 +53,7 @@
                     </div>
                     <span class="post-date information-item">
                         <i class="las la-calendar"></i>
-                        26 نوفمبر 2024
+            {{ \Carbon\Carbon::parse($blog['created_at'])->locale('ar')->translatedFormat('d F Y') }}
                     </span>
                     <span class="post-views information-item">
                         <i class="las la-eye"></i>
@@ -64,58 +62,30 @@
                 </div>
                 <div class="post-description">
                     <p>
-                        هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل
-                        الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها
-                        تعطي توزيعاَ طبيعياَ -إلى حد ما- للأحرف عوضاً عن استخدام "هنا يوجد محتوى نصي، هنا يوجد محتوى نصي"
-                        فتجعلها تبدو (أي الأحرف) وكأنها نص مقروء. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب
-                        تستخدم لوريم إيبسوم بشكل إفتراضي كنموذج عن النص، وإذا قمت بإدخال "lorem ipsum" في أي محرك بحث ستظهر
-                        العديد من المواقع الحديثة العهد في نتائج البحث. على مدى السنين ظهرت نسخ جديدة ومختلفة من نص لوريم
-                        إيبسوم، أحياناً عن طريق الصدفة، وأحياناً عن عمد كإدخال بعض العبارات الفكاهية إليها.
+                       {{ $blog['description'] }}
                     </p>
-                    <h3>
-                        ما هو "لوريم إيبسوم" ؟
-                    </h3>
-                    <p>
-                        لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في
-                        صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما
-                        قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع
-                        شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في
-                        الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق "ليتراسيت"
-                        (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر
-                        الإلكتروني مثل "ألدوس بايج مايكر" (Aldus PageMaker) والتي حوت أيضاً على نسخ من نص لوريم إيبسوم.
-                    </p>
-                    <h3>
-                        ما فائدته ؟
-                    </h3>
-                    <p>
-                        هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل
-                        الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها
-                        تعطي توزيعاَ طبيعياَ -إلى حد ما- للأحرف عوضاً عن استخدام "هنا يوجد محتوى نصي، هنا يوجد محتوى نصي"
-                        فتجعلها تبدو (أي الأحرف) وكأنها نص مقروء. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب
-                        تستخدم لوريم إيبسوم بشكل إفتراضي كنموذج عن النص، وإذا قمت بإدخال "lorem ipsum" في أي محرك بحث ستظهر
-                        العديد من المواقع الحديثة العهد في نتائج البحث. على مدى السنين ظهرت نسخ جديدة ومختلفة من نص لوريم
-                        إيبسوم، أحياناً عن طريق الصدفة، وأحياناً عن عمد كإدخال بعض العبارات الفكاهية إليها.
-                    </p>
-                </div>
-                @include('components.share')
+
+                @include('components.share', ['blog' => $blog])
             </div>
             <div class="related-blog">
                 <h3 class="related-title">
                     مقالات مماثلة
                 </h3>
                 <div class="blogs-slider">
-                    @include('components.blogSlider')
+                    @include('components.blogSlider',['blogs' => $blogs])
                 </div>
             </div>
             <div class="post-comments">
+                @if(isset($comments))
                 <h3 class="comments-title">التعليقات</h3>
-                @include('components.commentsList')
+                @include('components.commentsList',[ 'comments' => $comments])
+                @endif
                 <div class="comments-form">
                     <h3 class="comments-title">اترك تعليقًا</h3>
                     <p class="comments-hint">
                         لن يتم نشر بريدك الإلكتروني. الحقول الإلزامية عليها علامة
                     </p>
-                    @include('components.commentsForm')
+                    @include('components.commentsForm',['blog' => $blog ])
                 </div>
             </div>
         </div>

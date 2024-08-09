@@ -1,4 +1,4 @@
-@extends('layouts.master', ['setting' => $setting])
+@extends('layouts.master', ['setting' => $setting , 'categories' => $categories])
 @section('PageTitle', 'الرئيسية')
 
 @section('PageContent')

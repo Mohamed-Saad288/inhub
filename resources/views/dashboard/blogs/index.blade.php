@@ -44,8 +44,13 @@
         @forelse($blogs as $blog)
             <tr>
                 <td>{{ $blog->id }}</td>
-                <td><img src="{{ asset('storage/' . $blog->image) }}" alt="" height="50"> </td>
-                <td>{{ $blog->title }}</td>
+                <td>
+                    @if($blog->image)
+                        @foreach(explode(',', $blog->image) as $image)
+                            <img src="{{ asset('storage/' . $image) }}" alt="" height="50">
+                        @endforeach
+                    @endif
+                </td>                <td>{{ $blog->title }}</td>
                 <td>{{ $blog->status == 'active' ? 'نشط' : 'غير نشط' }}</td>
                 <td>{{ $blog->created_at->locale('ar')->diffForHumans()  }}</td>
                 @if(Auth::guard('employee')->user()->can('blogs.update'))

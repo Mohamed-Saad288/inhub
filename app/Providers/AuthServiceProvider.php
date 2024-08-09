@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Models\Employee;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use phpDocumentor\Reflection\Types\True_;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::before(function ($user,$ability){
+           if ($user->is_manger)
+           {
+               return true;
+           }
+        });
         foreach (config('abilities') as $code => $label)
         {
             Gate::define($code,function (Employee $employee) use ($code) {

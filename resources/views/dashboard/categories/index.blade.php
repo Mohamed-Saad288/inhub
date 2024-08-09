@@ -4,13 +4,13 @@
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">الفئات</li>
+    <li class="breadcrumb-item active">لتصنيفات</li>
 @endsection
 
 @section('content')
     @if(Auth::guard('employee')->user()->can('categories.create'))
 <div class="mb-5 p-4 " dir="rtl">
-    <a class="btn btn-small btn-outline-primary" href="{{ route('dashboard.categories.create') }}">انشاء فئة</a>
+    <a class="btn btn-small btn-outline-primary" href="{{ route('dashboard.categories.create') }}">انشاء تصنيف</a>
 </div>
     @endif
 
@@ -63,7 +63,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="7">لا توجد فئات حاليا</td>
+                <td colspan="7">لا توجد تصنيفات حاليا</td>
             </tr>
         @endforelse
         </tbody>

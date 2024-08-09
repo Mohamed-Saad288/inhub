@@ -3,6 +3,8 @@
         [
             'text' => 'الشروط والأحكام',
         ],
+          'setting' => $setting,
+       'categories' => $categories
     ],
 ])
 

@@ -23,11 +23,11 @@
                     </p>
                 </div>
             </div>
-            <div class="places-grid">
-                @foreach ($cities as $place)
-                    @include('components.placeItem', ['place' => $place])
-                @endforeach
-            </div>
+{{--            <div class="places-grid">--}}
+{{--                @foreach ($cities as $place)--}}
+{{--                    @include('components.placeItem', ['place' => $place])--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
         </div>
     </section>
 @endsection

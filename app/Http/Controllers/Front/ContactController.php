@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Setting;
 use http\Message;
@@ -13,7 +14,8 @@ class ContactController extends Controller
     public function create()
     {
         $setting = Setting::where('id',1)->first();
-        return view('contact',compact('setting'));
+        $categories = Category::all();
+        return view('contact',compact('setting','categories'));
     }
     public function store(Request $request)
     {

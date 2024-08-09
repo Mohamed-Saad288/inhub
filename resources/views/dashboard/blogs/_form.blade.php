@@ -28,11 +28,15 @@
     </select>
 </div>
 <div class="form-group">
-    <x-form.label label="الصورة" />
-    <input type="file" name="image" class="form-control">
-    @if($blog->image)
-        <img src="{{ asset('storage/' . $blog->image) }}" alt="" height="60">
-    @endif
+    <div class="form-group">
+        <x-form.label label="الصورة" />
+        <input type="file" name="image[]" class="form-control" multiple>
+        @if($blog->images)
+            @foreach(explode(',', $blog->images) as $image)
+                <img src="{{ asset('storage/' . $image) }}" alt="" height="60">
+            @endforeach
+        @endif
+    </div>
 </div>
 <div class="form-group">
     <x-form.radio name="status" :checked="$blog->status" :options="['active' => 'نشط' , 'inactive' => 'غير نشط']" />

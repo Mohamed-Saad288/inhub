@@ -51,7 +51,7 @@ class CategoryController extends Controller
     {
         $request->validate(Category::rules());
 
-        $category->update();
+        $category->update($request->only(['name', 'description', 'status']));
 
         return redirect()->route('dashboard.categories.index')
             ->with('success','تم تعديل الفئه بنجاح');

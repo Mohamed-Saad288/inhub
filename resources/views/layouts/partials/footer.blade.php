@@ -30,13 +30,13 @@
                             التصنيفات الرئيسية
                         </h3>
                         <ul class="footer-list">
-{{--                            @foreach ($categories as $category)--}}
-{{--                                <li>--}}
-{{--                                    <a href="/category">--}}
-{{--                                        {{ $category['title'] }}--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
-{{--                            @endforeach--}}
+                            @foreach ($categories as $category)
+                                <li>
+                                    <a href="{{ route('categories.show',$category->slug) }}">
+                                        {{ $category->name }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

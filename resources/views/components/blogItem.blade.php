@@ -1,7 +1,13 @@
 <div class="blog-item">
     <div class="blog-img">
         <a href="/post" class="img-holder loading-img lazy-img-parent">
-            <img data-src="{{ asset('storage/'.$blog['image']) }}" alt="{{ $blog['title'] }}" class="img-fluid lazy-img" />
+            @php
+                $images = explode(',', $blog['image']);
+                $firstImage = $images[0] ?? '';
+            @endphp
+            @if($firstImage)
+                <img data-src="{{ asset('storage/' . $firstImage) }}" alt="{{ $blog['title'] }}" class="img-fluid lazy-img" />
+            @endif
         </a>
 {{--        <div class="blog-tags">--}}
 {{--            @foreach ($blog['tags'] as $tag)--}}
@@ -19,7 +25,7 @@
     <p class="blog-summary">
         {{ $blog['description'] }}
     </p>
-    <a href="{{ route('blog.show',$blog['slug']) }}" class="blog-link">
+    <a href="{{ route('post.show',$blog['slug']) }}" class="blog-link">
         عرض المزيد
     </a>
 </div>

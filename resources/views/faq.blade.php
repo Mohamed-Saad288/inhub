@@ -3,6 +3,8 @@
         [
             'text' => 'الأسئلة الشائعة',
         ],
+          'setting' => $setting,
+       'categories' => $categories
     ],
 ])
 

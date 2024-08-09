@@ -31,6 +31,12 @@ class Blog extends Model
         $builder->when($filters['status'] ?? false , function ($builder,$value){
             $builder->where('blogs.status',$value);
         });
+        $builder->when($filters['order_by'] ?? false, function ($builder, $value) {
+            $orderDirection = in_array($value, ['asc', 'desc']) ? $value : 'desc';
+            $builder->orderBy('created_at', $orderDirection);
+        });
+
+        return $builder;
     }
 
     public static function rules()
@@ -39,7 +45,7 @@ class Blog extends Model
             'title' => 'required|string|min:3|max:255',
             'description' => 'nullable|string',
             'status' => 'required|in:active,inactive',
-            'image' => 'nullable|image',
+            'image' => 'nullable|array',
             'category_id' => 'nullable|exists:categories,id'
         ];
     }
@@ -47,5 +53,9 @@ class Blog extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

@@ -1,6 +1,6 @@
 <div class="comment-item">
     <div class="comment-img">
-        <img src="{{ $comment['img'] }}" alt="{{ $comment['name'] }}">
+        <img src="{{ asset('images/user/2.jpg') }}" alt="{{ $comment['name'] }}">
     </div>
     <div class="comment-text">
         <div class="comment-head">
@@ -9,7 +9,7 @@
             </h4>
             <h5 class="comment-time">
                 <span>
-                    16 أغسطس 2023
+            {{ \Carbon\Carbon::parse($comment['created_at'])->locale('ar')->translatedFormat('d F Y') }}
                 </span>
                 <span>
                     07:30
